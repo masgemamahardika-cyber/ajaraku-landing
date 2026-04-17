@@ -11,133 +11,197 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --bg: #FAF6F0;
-    --bg-warm: #F0E7D8;
-    --ink: #1F1B16;
-    --ink-soft: #4A4138;
-    --accent: #D9533D;
-    --accent-deep: #B23A26;
-    --accent-soft: #FCE8E2;
-    --gold: #C99B4A;
-    --green: #3B6B4A;
-    --line: #1F1B16;
+    /* Purple gradient primary */
+    --purple-50: #F5F3FF;
+    --purple-100: #EDE9FE;
+    --purple-200: #DDD6FE;
+    --purple-400: #A78BFA;
+    --purple-500: #8B5CF6;
+    --purple-600: #7C3AED;
+    --purple-700: #6D28D9;
+    --purple-gradient-start: #667EEA;
+    --purple-gradient-end: #764BA2;
+
+    /* Amber/gold accent (Ajaraku distinct) */
+    --amber-400: #FBBF24;
+    --amber-500: #F59E0B;
+    --amber-600: #D97706;
+    --amber-soft: #FEF3C7;
+
+    /* Pastel palette for stat cards */
+    --pastel-pink: #FCE7F3;
+    --pastel-peach: #FEE9D7;
+    --pastel-mint: #D1FAE5;
+    --pastel-sky: #DBEAFE;
+    --pastel-lilac: #E9D5FF;
+
+    /* Text */
+    --ink: #1E1B4B;
+    --ink-soft: #6B5FBC;
+    --ink-light: #8B83C7;
+
+    /* Backgrounds */
+    --bg: #FAFAFE;
+    --bg-card: #FFFFFF;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px rgba(102, 126, 234, 0.08);
+    --shadow-md: 0 8px 24px rgba(102, 126, 234, 0.12);
+    --shadow-lg: 0 16px 48px rgba(102, 126, 234, 0.18);
+    --shadow-purple: 0 12px 32px rgba(124, 58, 237, 0.25);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     background: var(--bg);
     color: var(--ink);
-    line-height: 1.5;
+    line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Noise texture overlay */
   body::before {
     content: '';
     position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.04;
+    top: -200px;
+    right: -200px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
     pointer-events: none;
-    z-index: 1;
-    mix-blend-mode: multiply;
+    z-index: 0;
   }
 
-  /* ========== NAV ========== */
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -300px;
+    left: -300px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
   nav {
-    position: relative;
-    z-index: 10;
-    padding: 24px 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 20px 32px;
+    background: rgba(250, 250, 254, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--purple-100);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--line);
   }
 
   .logo {
-    font-family: 'Fraunces', serif;
+    font-family: 'Nunito', sans-serif;
     font-weight: 900;
     font-size: 26px;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
+    color: var(--ink);
     display: flex;
     align-items: baseline;
-    gap: 4px;
   }
 
   .logo-mark {
-    color: var(--accent);
-    font-style: italic;
+    background: linear-gradient(135deg, var(--purple-gradient-start), var(--purple-gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .nav-tag {
-    font-size: 12px;
-    font-weight: 600;
-    background: var(--ink);
-    color: var(--bg);
-    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--amber-400), var(--amber-500));
+    color: white;
+    padding: 7px 14px;
     border-radius: 100px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
   }
 
-  /* ========== HERO ========== */
   .hero {
     position: relative;
     z-index: 5;
-    padding: 80px 32px 100px;
+    padding: 60px 32px 80px;
     max-width: 1200px;
     margin: 0 auto;
+    text-align: center;
   }
+
+  .hero-emoji-row {
+    display: inline-flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 24px;
+    animation: bounce 3s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .hero-emoji { font-size: 48px; }
 
   .hero-tag {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--accent-soft);
-    border: 1px solid var(--line);
-    padding: 8px 16px;
+    background: var(--purple-100);
+    border: 1.5px solid var(--purple-200);
+    padding: 8px 18px;
     border-radius: 100px;
     font-size: 13px;
-    font-weight: 500;
-    margin-bottom: 32px;
-    animation: fadeUp 0.8s ease-out;
+    font-weight: 700;
+    color: var(--purple-700);
+    margin-bottom: 24px;
   }
 
   .hero-tag-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
+    width: 8px;
+    height: 8px;
+    background: var(--purple-500);
     border-radius: 50%;
     animation: pulse 2s infinite;
   }
 
   @keyframes pulse {
     0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.3); }
+    50% { opacity: 0.5; transform: scale(1.4); }
   }
 
   h1.hero-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: clamp(38px, 7vw, 88px);
-    line-height: 0.98;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(36px, 6vw, 72px);
+    line-height: 1.1;
     letter-spacing: -0.03em;
-    margin-bottom: 32px;
-    animation: fadeUp 0.8s ease-out 0.1s both;
+    margin-bottom: 24px;
+    color: var(--ink);
   }
 
   .hero-title .highlight {
-    font-style: italic;
-    font-weight: 500;
-    color: var(--accent);
+    background: linear-gradient(135deg, var(--purple-gradient-start), var(--purple-gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     position: relative;
     display: inline-block;
   }
@@ -145,214 +209,165 @@
   .hero-title .highlight::after {
     content: '';
     position: absolute;
-    bottom: 4px;
+    bottom: -8px;
     left: 0;
     right: 0;
-    height: 12px;
-    background: var(--gold);
-    opacity: 0.3;
-    z-index: -1;
-    transform: skewX(-12deg);
+    height: 6px;
+    background: var(--amber-400);
+    border-radius: 100px;
+    opacity: 0.6;
   }
 
   .hero-sub {
-    font-size: clamp(17px, 2vw, 22px);
+    font-size: clamp(16px, 2vw, 20px);
     color: var(--ink-soft);
-    max-width: 660px;
-    margin-bottom: 48px;
-    line-height: 1.5;
-    animation: fadeUp 0.8s ease-out 0.2s both;
-  }
-
-  /* ========== AUDIENCE TOGGLE ========== */
-  .audience-toggle {
-    display: inline-flex;
-    background: var(--bg-warm);
-    border: 1.5px solid var(--ink);
-    border-radius: 100px;
-    padding: 4px;
-    margin-bottom: 24px;
-    animation: fadeUp 0.8s ease-out 0.25s both;
-  }
-
-  .toggle-btn {
-    padding: 10px 20px;
-    background: transparent;
-    border: none;
-    border-radius: 100px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    color: var(--ink-soft);
-  }
-
-  .toggle-btn.active {
-    background: var(--ink);
-    color: var(--bg);
-  }
-
-  /* ========== FORM ========== */
-  .form-wrap {
-    max-width: 580px;
-    background: var(--ink);
-    border-radius: 24px;
-    padding: 32px;
-    color: var(--bg);
-    animation: fadeUp 0.8s ease-out 0.3s both;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .form-wrap::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 320px;
-    height: 320px;
-    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-    opacity: 0.3;
-    pointer-events: none;
-  }
-
-  .form-content { position: relative; }
-
-  .form-content[data-mode="kreator"] .for-buyer,
-  .form-content[data-mode="pembeli"] .for-creator { display: none; }
-
-  .form-label {
-    font-family: 'Fraunces', serif;
-    font-size: 22px;
-    font-weight: 500;
-    margin-bottom: 8px;
-  }
-
-  .form-label-sub {
-    font-size: 14px;
-    color: rgba(250, 246, 240, 0.7);
-    margin-bottom: 24px;
-  }
-
-  .form-input-group {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .form-input {
-    flex: 1;
-    min-width: 200px;
-    padding: 16px 20px;
-    background: rgba(250, 246, 240, 0.08);
-    border: 1px solid rgba(250, 246, 240, 0.2);
-    border-radius: 12px;
-    color: var(--bg);
-    font-family: inherit;
-    font-size: 15px;
-    transition: border-color 0.2s, background 0.2s;
-  }
-
-  .form-input::placeholder { color: rgba(250, 246, 240, 0.4); }
-  .form-input:focus {
-    outline: none;
-    border-color: var(--accent);
-    background: rgba(250, 246, 240, 0.12);
-  }
-
-  .form-btn {
-    padding: 16px 28px;
-    background: var(--accent);
-    color: var(--bg);
-    border: none;
-    border-radius: 12px;
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-
-  .form-btn:hover { background: var(--accent-deep); transform: translateY(-1px); }
-
-  .form-bonus {
-    margin-top: 20px;
-    padding: 16px;
-    background: rgba(201, 155, 74, 0.15);
-    border-left: 3px solid var(--gold);
-    border-radius: 4px;
-    font-size: 13px;
+    max-width: 680px;
+    margin: 0 auto 40px;
     line-height: 1.6;
   }
 
-  .form-bonus strong { color: var(--gold); }
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
 
-  /* ========== PREVIEW CATALOG ========== */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--purple-gradient-start), var(--purple-gradient-end));
+    color: white;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 100px;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: var(--shadow-purple);
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(124, 58, 237, 0.35);
+  }
+
+  .btn-secondary {
+    background: white;
+    color: var(--ink);
+    padding: 16px 32px;
+    border: 2px solid var(--purple-200);
+    border-radius: 100px;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--purple-500);
+    color: var(--purple-700);
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    max-width: 900px;
+    margin: 48px auto 0;
+  }
+
+  .hero-stat {
+    padding: 24px 16px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--purple-100);
+  }
+
+  .hero-stat:nth-child(1) { background: linear-gradient(135deg, var(--pastel-lilac), white); }
+  .hero-stat:nth-child(2) { background: linear-gradient(135deg, var(--pastel-peach), white); }
+  .hero-stat:nth-child(3) { background: linear-gradient(135deg, var(--pastel-mint), white); }
+  .hero-stat:nth-child(4) { background: linear-gradient(135deg, var(--pastel-sky), white); }
+
+  .hero-stat-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .hero-stat-label {
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
   .preview-section {
-    background: var(--ink);
-    color: var(--bg);
-    padding: 80px 32px;
-    max-width: none;
-    margin: 0;
-    overflow: hidden;
     position: relative;
-  }
-
-  .preview-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-    opacity: 0.15;
-    pointer-events: none;
-  }
-
-  .preview-inner {
+    z-index: 5;
+    padding: 80px 32px;
     max-width: 1200px;
     margin: 0 auto;
-    position: relative;
-    z-index: 2;
   }
 
-  .preview-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    flex-wrap: wrap;
-    gap: 20px;
+  .section-badge {
+    display: inline-block;
+    background: var(--amber-soft);
+    color: var(--amber-600);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     margin-bottom: 16px;
   }
 
-  .preview-section .section-num { color: var(--accent); }
-  .preview-section .section-title { color: var(--bg); }
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 600px;
+    line-height: 1.6;
+  }
 
   .preview-disclaimer {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(217, 83, 61, 0.15);
-    border: 1px solid var(--accent);
+    background: var(--purple-50);
+    border: 1.5px solid var(--purple-200);
     padding: 10px 16px;
     border-radius: 100px;
     font-size: 13px;
-    font-weight: 500;
-    margin-bottom: 32px;
+    font-weight: 600;
+    color: var(--purple-700);
+    margin-bottom: 24px;
   }
 
-  .preview-disclaimer-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-
-  /* Category pills */
   .preview-pills {
     display: flex;
     gap: 10px;
@@ -365,29 +380,35 @@
   .preview-pill {
     flex-shrink: 0;
     padding: 10px 18px;
-    background: transparent;
-    border: 1.5px solid rgba(250, 246, 240, 0.3);
+    background: white;
+    border: 1.5px solid var(--purple-100);
     border-radius: 100px;
-    color: var(--bg);
+    color: var(--ink-soft);
     font-family: inherit;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
     white-space: nowrap;
   }
 
-  .preview-pill:hover, .preview-pill.active {
-    background: var(--accent);
-    border-color: var(--accent);
+  .preview-pill:hover {
+    border-color: var(--purple-500);
+    color: var(--purple-700);
   }
 
-  /* Product grid */
+  .preview-pill.active {
+    background: linear-gradient(135deg, var(--purple-gradient-start), var(--purple-gradient-end));
+    border-color: transparent;
+    color: white;
+    box-shadow: var(--shadow-purple);
+  }
+
   .preview-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
+    gap: 20px;
+    margin-bottom: 40px;
   }
 
   @media (max-width: 640px) {
@@ -398,64 +419,60 @@
   }
 
   .preview-card {
-    background: var(--bg);
-    color: var(--ink);
-    border-radius: 16px;
+    background: white;
+    border-radius: 20px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--purple-100);
   }
 
-  .preview-card:hover { transform: translateY(-4px); }
+  .preview-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--purple-200);
+  }
 
   .preview-cover {
     aspect-ratio: 3/4;
-    background: linear-gradient(135deg, var(--accent-soft), var(--bg-warm));
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
+    color: white;
   }
 
-  .preview-cover.video {
-    background: linear-gradient(135deg, #2A1F1A 0%, #1F1B16 100%);
-    color: var(--bg);
-  }
+  .preview-cover.modul { background: linear-gradient(135deg, #A78BFA 0%, #7C3AED 100%); }
+  .preview-cover.worksheet { background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%); }
+  .preview-cover.video { background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%); }
+  .preview-cover.soal { background: linear-gradient(135deg, #F472B6 0%, #EC4899 100%); }
+  .preview-cover.homeschooling { background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 100%); }
+  .preview-cover.minicourse { background: linear-gradient(135deg, #34D399 0%, #10B981 100%); }
+  .preview-cover.template { background: linear-gradient(135deg, #FB7185 0%, #F43F5E 100%); }
+  .preview-cover.aktivitas { background: linear-gradient(135deg, #F0ABFC 0%, #D946EF 100%); }
 
-  .preview-cover.green {
-    background: linear-gradient(135deg, #E8F0E5, #F0E7D8);
-  }
-
-  .preview-cover.pink {
-    background: linear-gradient(135deg, #FCE8E2, #F0DCD8);
-  }
-
-  .preview-cover-content {
-    text-align: center;
-  }
+  .preview-cover-content { text-align: center; position: relative; z-index: 2; }
 
   .preview-cover-tag {
     display: inline-block;
-    background: var(--ink);
-    color: var(--bg);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
     font-size: 9px;
-    font-weight: 700;
-    padding: 3px 8px;
+    font-weight: 800;
+    padding: 4px 10px;
     border-radius: 4px;
     margin-bottom: 10px;
     letter-spacing: 0.05em;
-  }
-
-  .preview-cover.video .preview-cover-tag {
-    background: var(--accent);
+    backdrop-filter: blur(10px);
   }
 
   .preview-cover-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
     line-height: 1.2;
   }
 
@@ -463,10 +480,9 @@
     font-size: 11px;
     margin-top: 6px;
     font-weight: 600;
-    opacity: 0.8;
+    opacity: 0.9;
   }
 
-  /* Play button for video */
   .preview-play {
     position: absolute;
     inset: 0;
@@ -477,8 +493,8 @@
   }
 
   .preview-play-btn {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 50%;
     display: flex;
@@ -486,52 +502,51 @@
     justify-content: center;
     color: var(--ink);
     font-size: 16px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
   }
 
-  /* Preview badge (coming soon) */
   .preview-badge {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    background: var(--gold);
-    color: var(--ink);
-    font-size: 9px;
-    font-weight: 700;
-    padding: 4px 8px;
-    border-radius: 4px;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, var(--amber-400), var(--amber-500));
+    color: white;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 5px 10px;
+    border-radius: 100px;
     letter-spacing: 0.05em;
-    z-index: 2;
+    z-index: 3;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
   }
 
   .preview-duration {
     position: absolute;
-    bottom: 10px;
-    left: 10px;
+    bottom: 12px;
+    right: 12px;
     background: rgba(0, 0, 0, 0.75);
     color: white;
     font-size: 10px;
     font-weight: 700;
-    padding: 3px 8px;
+    padding: 4px 10px;
     border-radius: 4px;
+    backdrop-filter: blur(10px);
   }
 
-  .preview-info {
-    padding: 14px;
-  }
+  .preview-info { padding: 14px; }
 
   .preview-cat {
     font-size: 9px;
-    font-weight: 700;
-    color: var(--accent);
+    font-weight: 800;
+    color: var(--purple-600);
     letter-spacing: 0.05em;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     text-transform: uppercase;
   }
 
   .preview-title-sm {
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     line-height: 1.3;
     margin-bottom: 8px;
     display: -webkit-box;
@@ -543,25 +558,25 @@
   }
 
   .preview-creator {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--ink-soft);
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
   }
 
   .preview-creator-dot {
-    width: 12px;
-    height: 12px;
-    background: var(--gold);
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, var(--amber-400), var(--amber-500));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 7px;
-    font-weight: 700;
-    color: var(--ink);
+    font-size: 8px;
+    font-weight: 800;
+    color: white;
   }
 
   .preview-price-row {
@@ -572,217 +587,267 @@
   }
 
   .preview-price {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
     color: var(--ink);
   }
 
   .preview-price-label {
     font-size: 9px;
-    color: var(--ink-soft);
+    color: var(--ink-light);
     font-style: italic;
   }
 
   .preview-notify-btn {
     width: 100%;
-    padding: 8px;
-    background: var(--bg-warm);
-    color: var(--ink);
-    border: 1px solid var(--ink);
-    border-radius: 8px;
+    padding: 9px;
+    background: var(--purple-50);
+    color: var(--purple-700);
+    border: 1.5px solid var(--purple-200);
+    border-radius: 10px;
     font-family: inherit;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
   }
 
   .preview-notify-btn:hover {
-    background: var(--ink);
-    color: var(--bg);
+    background: linear-gradient(135deg, var(--purple-gradient-start), var(--purple-gradient-end));
+    color: white;
+    border-color: transparent;
   }
 
-  .preview-cta-bottom {
-    text-align: center;
-    padding-top: 24px;
-  }
-
-  .preview-cta-text {
-    font-size: 14px;
-    margin-bottom: 16px;
-    opacity: 0.8;
-  }
-
-  .preview-cta-btn {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--bg);
-    padding: 14px 28px;
-    border-radius: 100px;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .preview-cta-btn:hover {
-    background: var(--accent-deep);
-    transform: translateY(-2px);
-  }
-
-  /* ========== SECTION ========== */
-  section {
+  .how-section {
+    background: linear-gradient(135deg, var(--purple-gradient-start), var(--purple-gradient-end));
+    padding: 80px 32px;
+    color: white;
     position: relative;
-    z-index: 5;
-    padding: 100px 32px;
+    overflow: hidden;
+  }
+
+  .how-section::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: rgba(251, 191, 36, 0.15);
+    border-radius: 50%;
+  }
+
+  .how-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+  }
+
+  .how-inner {
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    text-align: center;
   }
 
-  .section-num {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
+  .how-section .section-badge {
+    background: rgba(251, 191, 36, 0.2);
+    color: var(--amber-400);
+  }
+
+  .how-section .section-title { color: white; }
+
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .how-step {
+    background: white;
+    border-radius: 24px;
+    padding: 32px 24px;
+    color: var(--ink);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+  }
+
+  .how-step-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--purple-gradient-start), var(--purple-gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+
+  .how-step-emoji {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .how-step-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .how-step-desc {
     font-size: 14px;
-    color: var(--accent);
-    margin-bottom: 16px;
-    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    line-height: 1.6;
   }
 
-  .section-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: clamp(32px, 5vw, 56px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+  .duo-section {
+    padding: 80px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 5;
+  }
+
+  .duo-header {
+    text-align: center;
     margin-bottom: 48px;
-    max-width: 800px;
   }
 
-  /* ========== TWO-WAY VALUE PROP ========== */
   .duo-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 24px;
   }
 
   @media (max-width: 768px) { .duo-grid { grid-template-columns: 1fr; } }
 
   .duo-card {
     padding: 40px 32px;
-    border-radius: 24px;
-    border: 1.5px solid var(--ink);
+    border-radius: 28px;
+    position: relative;
+    overflow: hidden;
   }
 
   .duo-card.creator {
-    background: var(--ink);
-    color: var(--bg);
+    background: linear-gradient(135deg, var(--purple-gradient-start), var(--purple-gradient-end));
+    color: white;
+  }
+
+  .duo-card.creator::before {
+    content: '💰';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 160px;
+    opacity: 0.1;
   }
 
   .duo-card.buyer {
-    background: var(--accent-soft);
+    background: white;
+    border: 2px solid var(--purple-100);
+    color: var(--ink);
   }
 
-  .duo-icon {
+  .duo-card.buyer::before {
+    content: '🛍️';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 160px;
+    opacity: 0.1;
+  }
+
+  .duo-emoji {
+    font-size: 40px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .duo-tag {
     display: inline-block;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 14px;
-    padding: 6px 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 6px 14px;
     border-radius: 100px;
-    margin-bottom: 24px;
-    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    position: relative;
   }
 
-  .duo-card.creator .duo-icon { background: var(--accent); color: var(--bg); }
-  .duo-card.buyer .duo-icon { background: var(--ink); color: var(--bg); }
+  .duo-card.creator .duo-tag { background: var(--amber-400); color: var(--ink); }
+  .duo-card.buyer .duo-tag { background: var(--purple-100); color: var(--purple-700); }
 
   .duo-title {
-    font-family: 'Fraunces', serif;
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 1.1;
+    font-family: 'Nunito', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1.15;
     margin-bottom: 16px;
+    position: relative;
   }
 
   .duo-desc {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.6;
     margin-bottom: 24px;
-    opacity: 0.9;
+    opacity: 0.95;
+    position: relative;
   }
 
   .duo-list {
     list-style: none;
     padding: 0;
+    position: relative;
   }
 
   .duo-list li {
     padding: 10px 0;
-    border-top: 1px solid currentColor;
-    font-size: 15px;
-    opacity: 0.8;
+    font-size: 14px;
     display: flex;
-    align-items: center;
-    gap: 12px;
+    align-items: start;
+    gap: 10px;
+    font-weight: 600;
   }
 
   .duo-list li::before {
-    content: '→';
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 600;
-    color: var(--accent);
-    font-size: 18px;
+    content: '✓';
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
   }
 
-  .duo-card.buyer .duo-list li::before { color: var(--accent-deep); }
-
-  /* ========== HOW IT WORKS ========== */
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+  .duo-card.creator .duo-list li::before { background: var(--amber-400); color: var(--ink); }
+  .duo-card.buyer .duo-list li::before {
+    background: linear-gradient(135deg, var(--purple-500), var(--purple-700));
+    color: white;
   }
 
-  .step {
-    background: var(--bg-warm);
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 32px;
-    transition: transform 0.3s, box-shadow 0.3s;
+  .cat-section {
+    padding: 80px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 5;
   }
 
-  .step:hover {
-    transform: translateY(-4px);
-    box-shadow: 6px 6px 0 var(--ink);
-  }
-
-  .step-number {
-    font-family: 'Fraunces', serif;
-    font-weight: 900;
-    font-size: 64px;
-    line-height: 1;
-    color: var(--accent);
-    margin-bottom: 16px;
-    font-style: italic;
-  }
-
-  .step-title {
-    font-family: 'Fraunces', serif;
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-
-  .step-desc {
-    color: var(--ink-soft);
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  /* ========== CATEGORY GRID ========== */
   .cat-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -790,647 +855,633 @@
   }
 
   .cat-card {
-    padding: 24px;
-    background: var(--bg);
-    border: 1.5px solid var(--ink);
-    border-radius: 16px;
+    padding: 28px 24px;
+    background: white;
+    border: 1.5px solid var(--purple-100);
+    border-radius: 20px;
     transition: all 0.3s;
     cursor: default;
+    position: relative;
+    overflow: hidden;
   }
 
   .cat-card:hover {
-    background: var(--ink);
-    color: var(--bg);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--purple-400);
   }
 
-  .cat-card:hover .cat-tag { background: var(--accent); color: var(--bg); }
+  .cat-emoji {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
 
   .cat-tag {
     display: inline-block;
-    font-size: 11px;
-    font-weight: 700;
+    font-size: 10px;
+    font-weight: 800;
     padding: 4px 10px;
-    background: var(--gold);
-    color: var(--ink);
+    background: var(--amber-soft);
+    color: var(--amber-600);
     border-radius: 100px;
     margin-bottom: 12px;
-    transition: all 0.3s;
     letter-spacing: 0.05em;
   }
 
   .cat-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 800;
     margin-bottom: 6px;
+    color: var(--ink);
   }
 
   .cat-desc {
     font-size: 13px;
     line-height: 1.5;
-    opacity: 0.7;
+    color: var(--ink-soft);
   }
 
-  /* ========== STATS / SOCIAL PROOF ========== */
-  .stats-strip {
-    background: var(--ink);
-    color: var(--bg);
-    padding: 60px 32px;
-    margin: 0;
-    max-width: none;
-    overflow: hidden;
-  }
-
-  .stats-inner {
-    max-width: 1200px;
+  .faq-section {
+    padding: 80px 32px;
+    max-width: 800px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 32px;
+    position: relative;
+    z-index: 5;
+    text-align: center;
   }
 
-  .stat {
-    border-left: 2px solid var(--accent);
-    padding-left: 20px;
+  .faq-list {
+    margin-top: 32px;
+    text-align: left;
   }
 
-  .stat-num {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 40px;
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-
-  .stat-label {
-    font-size: 13px;
-    color: rgba(250, 246, 240, 0.7);
-    line-height: 1.4;
-  }
-
-  /* ========== FAQ ========== */
   .faq-item {
-    border-top: 1px solid var(--line);
-    padding: 24px 0;
+    background: white;
+    border: 1.5px solid var(--purple-100);
+    border-radius: 16px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: all 0.3s;
   }
 
-  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-item:hover { border-color: var(--purple-200); }
 
   .faq-q {
-    font-family: 'Fraunces', serif;
-    font-size: 20px;
-    font-weight: 500;
+    padding: 20px 24px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 15px;
   }
 
   .faq-q-toggle {
-    font-size: 28px;
-    color: var(--accent);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--purple-100);
+    color: var(--purple-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 18px;
     transition: transform 0.3s;
     flex-shrink: 0;
   }
 
-  .faq-item.open .faq-q-toggle { transform: rotate(45deg); }
+  .faq-item.open .faq-q-toggle {
+    transform: rotate(45deg);
+    background: linear-gradient(135deg, var(--purple-gradient-start), var(--purple-gradient-end));
+    color: white;
+  }
 
   .faq-a {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 24px;
     color: var(--ink-soft);
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 14px;
+    line-height: 1.6;
   }
 
   .faq-item.open .faq-a {
     max-height: 400px;
-    padding-top: 16px;
+    padding: 0 24px 20px;
   }
 
-  /* ========== FOOTER CTA ========== */
   .final-cta {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 100%);
-    color: var(--bg);
+    padding: 80px 32px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .final-cta-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--purple-gradient-start), var(--purple-gradient-end));
+    border-radius: 32px;
+    padding: 60px 40px;
     text-align: center;
-    padding: 100px 32px;
-    margin: 0;
-    max-width: none;
+    color: white;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-lg);
   }
 
-  .final-cta::before {
-    content: '';
+  .final-cta-inner::before {
+    content: '✨';
     position: absolute;
-    top: -50%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-    pointer-events: none;
+    top: 20px;
+    right: 40px;
+    font-size: 60px;
+    opacity: 0.3;
   }
 
-  .final-cta-inner { position: relative; max-width: 800px; margin: 0 auto; }
+  .final-cta-inner::after {
+    content: '🎯';
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+    font-size: 80px;
+    opacity: 0.2;
+  }
 
   .final-cta h2 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(32px, 5vw, 56px);
-    font-weight: 500;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin-bottom: 24px;
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 900;
+    margin-bottom: 12px;
+    position: relative;
   }
 
-  .final-cta p { font-size: 18px; margin-bottom: 32px; opacity: 0.9; }
+  .final-cta p {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 32px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
 
-  .final-cta .form-wrap {
-    background: var(--ink);
+  .form-wrap {
+    max-width: 500px;
     margin: 0 auto;
-    text-align: left;
+    position: relative;
   }
 
-  /* ========== FOOTER ========== */
-  footer {
-    background: var(--ink);
-    color: var(--bg);
-    padding: 32px;
-    text-align: center;
+  .form-input-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    background: white;
+    padding: 8px;
+    border-radius: 100px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 480px) {
+    .form-input-group {
+      border-radius: 20px;
+      flex-direction: column;
+      padding: 12px;
+    }
+  }
+
+  .form-input {
+    flex: 1;
+    min-width: 180px;
+    padding: 14px 20px;
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+  }
+
+  .form-input::placeholder { color: var(--ink-light); }
+
+  .form-btn {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--amber-400), var(--amber-500));
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  }
+
+  .form-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.5);
+  }
+
+  .form-bonus {
+    margin-top: 20px;
+    padding: 14px 20px;
+    background: rgba(251, 191, 36, 0.15);
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    border-radius: 16px;
     font-size: 13px;
-    opacity: 0.7;
+    line-height: 1.5;
+    color: white;
+    position: relative;
   }
 
-  footer a { color: var(--accent); text-decoration: none; }
+  .form-bonus strong { color: var(--amber-400); }
 
-  /* ========== ANIMATIONS ========== */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  footer {
+    padding: 40px 32px;
+    text-align: center;
+    background: var(--ink);
+    color: white;
+    font-size: 13px;
   }
 
-  /* ========== MOBILE ========== */
-  @media (max-width: 640px) {
-    nav { padding: 20px; }
-    .hero { padding: 48px 20px 60px; }
-    section { padding: 60px 20px; }
-    .stats-strip, .final-cta { padding: 60px 20px; }
-    .form-wrap { padding: 24px; }
-    .form-input-group { flex-direction: column; }
-    .form-input, .form-btn { width: 100%; }
-    .duo-card { padding: 28px 24px; }
-  }
+  footer a { color: var(--amber-400); text-decoration: none; font-weight: 700; }
+  footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="logo">
-    Mater<span class="logo-mark">in</span>.
-  </div>
-  <span class="nav-tag">PRE-LAUNCH</span>
+  <div class="logo">Ajar<span class="logo-mark">aku</span>.</div>
+  <span class="nav-tag">🚀 Pre-launch</span>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
+  <div class="hero-emoji-row">
+    <span class="hero-emoji">📚</span>
+    <span class="hero-emoji">✨</span>
+    <span class="hero-emoji">💰</span>
+  </div>
+
   <div class="hero-tag">
     <span class="hero-tag-dot"></span>
-    Pre-launch · Slot Founding Creator dibuka terbatas
+    Marketplace materi belajar #1 di Indonesia
   </div>
 
   <h1 class="hero-title">
-    Materi belajar siap pakai. Buat <span class="highlight">guru</span>, buat <span class="highlight">anak</span>.
+    Materi belajar <span class="highlight">siap pakai</span>,<br>
+    buat guru & anak Indonesia.
   </h1>
 
   <p class="hero-sub">
-    Ajaraku adalah marketplace materi belajar digital. Guru jual modul, soal, dan worksheet karyanya. Sesama guru dan orangtua beli untuk mengajar atau menemani anak belajar di rumah.
+    Tempat guru jual modul ajar, soal, worksheet, dan video pembelajaran ke sesama guru dan orangtua. Sekali bikin, dijual berkali-kali.
   </p>
 
-  <!-- AUDIENCE TOGGLE -->
-  <div class="audience-toggle">
-    <button class="toggle-btn active" onclick="switchMode('kreator', this)">Saya kreator/guru</button>
-    <button class="toggle-btn" onclick="switchMode('pembeli', this)">Saya cari materi</button>
+  <div class="cta-row">
+    <a href="#daftar" class="btn-primary">Daftar Gratis →</a>
+    <a href="#preview" class="btn-secondary">Lihat Katalog</a>
   </div>
 
-  <!-- FORM -->
-  <div class="form-wrap" id="form-top">
-    <div class="form-content" data-mode="kreator">
-      <!-- For Creator -->
-      <div class="for-creator">
-        <div class="form-label">Daftar jadi Founding Creator</div>
-        <div class="form-label-sub">Upload materi, kami bantu jualkan. Sekali bikin, dijual berkali-kali.</div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">3,4 jt+</div>
+      <div class="hero-stat-label">Guru di Indonesia</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">90%</div>
+      <div class="hero-stat-label">Komisi untuk Kreator</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">Rp 0</div>
+      <div class="hero-stat-label">Biaya pendaftaran</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">100</div>
+      <div class="hero-stat-label">Slot Founding Creator</div>
+    </div>
+  </div>
+</section>
 
-        <form class="form-input-group" onsubmit="handleSubmit(event, 'kreator')">
-          <input type="text" class="form-input" placeholder="Nama lengkap" required>
-          <input type="email" class="form-input" placeholder="Email aktif" required>
-          <button type="submit" class="form-btn">Daftar →</button>
-        </form>
+<section class="preview-section" id="preview">
+  <span class="section-badge">✨ Sneak Peek</span>
+  <h2 class="section-title">Preview katalog Ajaraku 👀</h2>
+  <p class="section-sub">Lihat contoh materi yang akan tersedia saat launch. Klik "Kabari Saya" untuk dapat notif pertama kali.</p>
 
-        <div class="form-bonus">
-          <strong>BONUS Founding Creator:</strong><br>
-          Komisi lebih besar (90%) + akses gratis selamanya + masuk grup eksklusif Mas Gema. Hanya 100 slot.
+  <div class="preview-disclaimer">
+    🚨 Ini preview — platform belum launch. Produk beneran menyusul!
+  </div>
+
+  <div class="preview-pills">
+    <button class="preview-pill active">🔥 Semua</button>
+    <button class="preview-pill">📚 Modul Ajar</button>
+    <button class="preview-pill">📝 Bank Soal</button>
+    <button class="preview-pill">✏️ Worksheet</button>
+    <button class="preview-pill">🎥 Video</button>
+    <button class="preview-pill">🎨 Aktivitas PAUD</button>
+  </div>
+
+  <div class="preview-grid">
+    <div class="preview-card">
+      <div class="preview-cover modul">
+        <span class="preview-badge">PREVIEW</span>
+        <div class="preview-cover-content">
+          <span class="preview-cover-tag">MODUL AJAR</span>
+          <div class="preview-cover-title">Matematika Kelas 4</div>
+          <div class="preview-cover-sub">Bab Pecahan · 6 Pertemuan</div>
         </div>
       </div>
-
-      <!-- For Buyer -->
-      <div class="for-buyer">
-        <div class="form-label">Daftar jadi Early Buyer</div>
-        <div class="form-label-sub">Dapat akses pertama saat platform launch + voucher diskon.</div>
-
-        <form class="form-input-group" onsubmit="handleSubmit(event, 'pembeli')">
-          <input type="text" class="form-input" placeholder="Nama lengkap" required>
-          <input type="email" class="form-input" placeholder="Email aktif" required>
-          <button type="submit" class="form-btn">Daftar →</button>
-        </form>
-
-        <div class="form-bonus">
-          <strong>BONUS Early Buyer:</strong><br>
-          Voucher Rp 25.000 untuk pembelian pertama + akses koleksi eksklusif Founding Creator.
+      <div class="preview-info">
+        <div class="preview-cat">MODUL AJAR · SD</div>
+        <div class="preview-title-sm">Modul Ajar Matematika Kelas 4 — Bab Pecahan</div>
+        <div class="preview-creator"><span class="preview-creator-dot">L</span>Bu Linda</div>
+        <div class="preview-price-row">
+          <div class="preview-price">Rp 45.000</div>
+          <div class="preview-price-label">perkiraan</div>
         </div>
+        <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
+      </div>
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-cover worksheet">
+        <span class="preview-badge">PREVIEW</span>
+        <div class="preview-cover-content">
+          <span class="preview-cover-tag">LKPD</span>
+          <div class="preview-cover-title">Worksheet Membaca</div>
+          <div class="preview-cover-sub">PAUD/TK · 20 Lembar</div>
+        </div>
+      </div>
+      <div class="preview-info">
+        <div class="preview-cat">WORKSHEET · PAUD</div>
+        <div class="preview-title-sm">Bundle Worksheet Membaca PAUD — 20 Lembar</div>
+        <div class="preview-creator"><span class="preview-creator-dot">A</span>Bu Aisyah</div>
+        <div class="preview-price-row">
+          <div class="preview-price">Rp 25.000</div>
+          <div class="preview-price-label">perkiraan</div>
+        </div>
+        <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
+      </div>
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-cover video">
+        <span class="preview-badge">PREVIEW</span>
+        <div class="preview-cover-content">
+          <span class="preview-cover-tag">VIDEO</span>
+          <div class="preview-cover-title">Belajar Huruf A-Z</div>
+          <div class="preview-cover-sub">Lagu + Animasi</div>
+        </div>
+        <div class="preview-play">
+          <div class="preview-play-btn">▶</div>
+        </div>
+        <div class="preview-duration">⏱ 12:30</div>
+      </div>
+      <div class="preview-info">
+        <div class="preview-cat">VIDEO · PAUD</div>
+        <div class="preview-title-sm">Belajar Huruf A-Z dengan Lagu & Animasi</div>
+        <div class="preview-creator"><span class="preview-creator-dot">M</span>Bu Mira</div>
+        <div class="preview-price-row">
+          <div class="preview-price">Rp 35.000</div>
+          <div class="preview-price-label">perkiraan</div>
+        </div>
+        <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
+      </div>
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-cover soal">
+        <span class="preview-badge">PREVIEW</span>
+        <div class="preview-cover-content">
+          <span class="preview-cover-tag">BANK SOAL</span>
+          <div class="preview-cover-title">PAS IPA SMP</div>
+          <div class="preview-cover-sub">Kelas 8 · 50 Soal HOTS</div>
+        </div>
+      </div>
+      <div class="preview-info">
+        <div class="preview-cat">BANK SOAL · SMP</div>
+        <div class="preview-title-sm">Bank Soal PAS IPA Kelas 8 — HOTS dengan Kunci</div>
+        <div class="preview-creator"><span class="preview-creator-dot">H</span>Pak Hadi</div>
+        <div class="preview-price-row">
+          <div class="preview-price">Rp 35.000</div>
+          <div class="preview-price-label">perkiraan</div>
+        </div>
+        <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
+      </div>
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-cover homeschooling">
+        <span class="preview-badge">PREVIEW</span>
+        <div class="preview-cover-content">
+          <span class="preview-cover-tag">HOMESCHOOLING</span>
+          <div class="preview-cover-title">Belajar di Rumah</div>
+          <div class="preview-cover-sub">Anak SD · 1 Bulan</div>
+        </div>
+      </div>
+      <div class="preview-info">
+        <div class="preview-cat">HOMESCHOOLING · SD</div>
+        <div class="preview-title-sm">Paket Aktivitas Belajar di Rumah — 1 Bulan</div>
+        <div class="preview-creator"><span class="preview-creator-dot">R</span>Bu Rita</div>
+        <div class="preview-price-row">
+          <div class="preview-price">Rp 75.000</div>
+          <div class="preview-price-label">perkiraan</div>
+        </div>
+        <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
+      </div>
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-cover minicourse">
+        <span class="preview-badge">PREVIEW</span>
+        <div class="preview-cover-content">
+          <span class="preview-cover-tag">MINI-COURSE</span>
+          <div class="preview-cover-title">Cepat Baca SD</div>
+          <div class="preview-cover-sub">10 Video · 2 Jam</div>
+        </div>
+        <div class="preview-play">
+          <div class="preview-play-btn">▶</div>
+        </div>
+        <div class="preview-duration">⏱ 2 jam</div>
+      </div>
+      <div class="preview-info">
+        <div class="preview-cat">MINI-COURSE · SD</div>
+        <div class="preview-title-sm">Mini-Course Cepat Baca Anak SD — 10 Video</div>
+        <div class="preview-creator"><span class="preview-creator-dot">D</span>Bu Dewi</div>
+        <div class="preview-price-row">
+          <div class="preview-price">Rp 250.000</div>
+          <div class="preview-price-label">perkiraan</div>
+        </div>
+        <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
+      </div>
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-cover template">
+        <span class="preview-badge">PREVIEW</span>
+        <div class="preview-cover-content">
+          <span class="preview-cover-tag">TEMPLATE PPT</span>
+          <div class="preview-cover-title">Slide Pembelajaran</div>
+          <div class="preview-cover-sub">10 Tema Editable</div>
+        </div>
+      </div>
+      <div class="preview-info">
+        <div class="preview-cat">TEMPLATE · GURU</div>
+        <div class="preview-title-sm">Template PowerPoint Pembelajaran — 10 Tema</div>
+        <div class="preview-creator"><span class="preview-creator-dot">S</span>Bu Sari</div>
+        <div class="preview-price-row">
+          <div class="preview-price">Rp 50.000</div>
+          <div class="preview-price-label">perkiraan</div>
+        </div>
+        <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
+      </div>
+    </div>
+
+    <div class="preview-card">
+      <div class="preview-cover aktivitas">
+        <span class="preview-badge">PREVIEW</span>
+        <div class="preview-cover-content">
+          <span class="preview-cover-tag">AKTIVITAS</span>
+          <div class="preview-cover-title">Coloring Pack</div>
+          <div class="preview-cover-sub">PAUD · 30 Halaman</div>
+        </div>
+      </div>
+      <div class="preview-info">
+        <div class="preview-cat">AKTIVITAS · PAUD</div>
+        <div class="preview-title-sm">Coloring Pack PAUD — 30 Halaman Tematik</div>
+        <div class="preview-creator"><span class="preview-creator-dot">N</span>Bu Nita</div>
+        <div class="preview-price-row">
+          <div class="preview-price">Rp 18.000</div>
+          <div class="preview-price-label">perkiraan</div>
+        </div>
+        <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PREVIEW CATALOG (NEW SECTION) -->
-<section class="preview-section">
-  <div class="preview-inner">
-    <div class="preview-header">
-      <div>
-        <div class="section-num">Sneak peek</div>
-        <h2 class="section-title">Preview katalog Ajaraku.</h2>
-      </div>
-    </div>
+<section class="how-section">
+  <div class="how-inner">
+    <span class="section-badge">🎯 Cara Kerjanya</span>
+    <h2 class="section-title">Sederhana untuk semua 🎉</h2>
 
-    <div class="preview-disclaimer">
-      <span class="preview-disclaimer-dot"></span>
-      Ini preview — platform belum launch. Klik "Kabari Saya" untuk notif saat produk tersedia.
-    </div>
-
-    <!-- Category pills -->
-    <div class="preview-pills">
-      <button class="preview-pill active">🔥 Semua</button>
-      <button class="preview-pill">📚 Modul Ajar</button>
-      <button class="preview-pill">📝 Bank Soal</button>
-      <button class="preview-pill">✏️ LKPD & Worksheet</button>
-      <button class="preview-pill">🎥 Video Pembelajaran</button>
-      <button class="preview-pill">🎨 Aktivitas PAUD/TK</button>
-    </div>
-
-    <!-- Product grid -->
-    <div class="preview-grid">
-      <!-- Card 1: Modul Matematika -->
-      <div class="preview-card">
-        <div class="preview-cover">
-          <span class="preview-badge">PREVIEW</span>
-          <div class="preview-cover-content">
-            <span class="preview-cover-tag">MODUL AJAR</span>
-            <div class="preview-cover-title">Matematika Kelas 4</div>
-            <div class="preview-cover-sub">Bab Pecahan · 6 Pertemuan</div>
-          </div>
-        </div>
-        <div class="preview-info">
-          <div class="preview-cat">MODUL AJAR · SD</div>
-          <div class="preview-title-sm">Modul Ajar Matematika Kelas 4 — Bab Pecahan</div>
-          <div class="preview-creator">
-            <span class="preview-creator-dot">L</span>
-            Bu Linda
-          </div>
-          <div class="preview-price-row">
-            <div class="preview-price">Rp 45.000</div>
-            <div class="preview-price-label">perkiraan</div>
-          </div>
-          <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
-        </div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <div class="how-step-emoji">📤</div>
+        <div class="how-step-title">Kreator Upload</div>
+        <div class="how-step-desc">Modul ajar, soal, LKPD, worksheet, atau video pembelajaran. Set judul, kategori, dan harga sendiri.</div>
       </div>
 
-      <!-- Card 2: LKPD PAUD -->
-      <div class="preview-card">
-        <div class="preview-cover green">
-          <span class="preview-badge">PREVIEW</span>
-          <div class="preview-cover-content">
-            <span class="preview-cover-tag">LKPD</span>
-            <div class="preview-cover-title">Worksheet Membaca</div>
-            <div class="preview-cover-sub">PAUD/TK · 20 Lembar</div>
-          </div>
-        </div>
-        <div class="preview-info">
-          <div class="preview-cat">WORKSHEET · PAUD</div>
-          <div class="preview-title-sm">Bundle Worksheet Membaca PAUD — 20 Lembar</div>
-          <div class="preview-creator">
-            <span class="preview-creator-dot">A</span>
-            Bu Aisyah
-          </div>
-          <div class="preview-price-row">
-            <div class="preview-price">Rp 25.000</div>
-            <div class="preview-price-label">perkiraan</div>
-          </div>
-          <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
-        </div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <div class="how-step-emoji">🛒</div>
+        <div class="how-step-title">Pembeli Cari & Beli</div>
+        <div class="how-step-desc">Guru cari modul untuk kelas, orangtua cari worksheet untuk anak. Bayar via QRIS, transfer, atau e-wallet.</div>
       </div>
 
-      <!-- Card 3: Video PAUD -->
-      <div class="preview-card">
-        <div class="preview-cover video">
-          <span class="preview-badge">PREVIEW</span>
-          <div class="preview-cover-content">
-            <span class="preview-cover-tag">VIDEO</span>
-            <div class="preview-cover-title">Belajar Huruf A-Z</div>
-            <div class="preview-cover-sub">Lagu + Animasi</div>
-          </div>
-          <div class="preview-play">
-            <div class="preview-play-btn">▶</div>
-          </div>
-          <div class="preview-duration">⏱ 12:30</div>
-        </div>
-        <div class="preview-info">
-          <div class="preview-cat">VIDEO · PAUD</div>
-          <div class="preview-title-sm">Belajar Huruf A-Z dengan Lagu & Animasi</div>
-          <div class="preview-creator">
-            <span class="preview-creator-dot">M</span>
-            Bu Mira
-          </div>
-          <div class="preview-price-row">
-            <div class="preview-price">Rp 35.000</div>
-            <div class="preview-price-label">perkiraan</div>
-          </div>
-          <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
-        </div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <div class="how-step-emoji">🎉</div>
+        <div class="how-step-title">Semua Menang</div>
+        <div class="how-step-desc">File otomatis terdeliver dengan watermark anti-bajak. Kreator dapat cuan tiap minggu. Pembeli hemat waktu.</div>
       </div>
-
-      <!-- Card 4: Bank Soal -->
-      <div class="preview-card">
-        <div class="preview-cover pink">
-          <span class="preview-badge">PREVIEW</span>
-          <div class="preview-cover-content">
-            <span class="preview-cover-tag">BANK SOAL</span>
-            <div class="preview-cover-title">PAS IPA SMP</div>
-            <div class="preview-cover-sub">Kelas 8 · 50 Soal HOTS</div>
-          </div>
-        </div>
-        <div class="preview-info">
-          <div class="preview-cat">BANK SOAL · SMP</div>
-          <div class="preview-title-sm">Bank Soal PAS IPA Kelas 8 — HOTS dengan Kunci</div>
-          <div class="preview-creator">
-            <span class="preview-creator-dot">H</span>
-            Pak Hadi
-          </div>
-          <div class="preview-price-row">
-            <div class="preview-price">Rp 35.000</div>
-            <div class="preview-price-label">perkiraan</div>
-          </div>
-          <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
-        </div>
-      </div>
-
-      <!-- Card 5: Homeschooling -->
-      <div class="preview-card">
-        <div class="preview-cover" style="background: linear-gradient(135deg, #F4ECDD, #E8DCC0);">
-          <span class="preview-badge">PREVIEW</span>
-          <div class="preview-cover-content">
-            <span class="preview-cover-tag">HOMESCHOOLING</span>
-            <div class="preview-cover-title">Belajar di Rumah</div>
-            <div class="preview-cover-sub">Anak SD · 1 Bulan</div>
-          </div>
-        </div>
-        <div class="preview-info">
-          <div class="preview-cat">HOMESCHOOLING · SD</div>
-          <div class="preview-title-sm">Paket Aktivitas Belajar di Rumah — 1 Bulan</div>
-          <div class="preview-creator">
-            <span class="preview-creator-dot">R</span>
-            Bu Rita
-          </div>
-          <div class="preview-price-row">
-            <div class="preview-price">Rp 75.000</div>
-            <div class="preview-price-label">perkiraan</div>
-          </div>
-          <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
-        </div>
-      </div>
-
-      <!-- Card 6: Mini-course Video -->
-      <div class="preview-card">
-        <div class="preview-cover video">
-          <span class="preview-badge">PREVIEW</span>
-          <div class="preview-cover-content">
-            <span class="preview-cover-tag" style="background: var(--gold); color: var(--ink);">MINI-COURSE</span>
-            <div class="preview-cover-title">Cepat Baca SD</div>
-            <div class="preview-cover-sub">10 Video · 2 Jam</div>
-          </div>
-          <div class="preview-play">
-            <div class="preview-play-btn">▶</div>
-          </div>
-          <div class="preview-duration">⏱ 2 jam</div>
-        </div>
-        <div class="preview-info">
-          <div class="preview-cat">MINI-COURSE · SD</div>
-          <div class="preview-title-sm">Mini-Course Cepat Baca Anak SD — 10 Video</div>
-          <div class="preview-creator">
-            <span class="preview-creator-dot">D</span>
-            Bu Dewi
-          </div>
-          <div class="preview-price-row">
-            <div class="preview-price">Rp 250.000</div>
-            <div class="preview-price-label">perkiraan</div>
-          </div>
-          <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
-        </div>
-      </div>
-
-      <!-- Card 7: Template PPT -->
-      <div class="preview-card">
-        <div class="preview-cover" style="background: linear-gradient(135deg, #E5DBC9, #FCE8E2);">
-          <span class="preview-badge">PREVIEW</span>
-          <div class="preview-cover-content">
-            <span class="preview-cover-tag">TEMPLATE PPT</span>
-            <div class="preview-cover-title">Slide Pembelajaran</div>
-            <div class="preview-cover-sub">10 Tema Editable</div>
-          </div>
-        </div>
-        <div class="preview-info">
-          <div class="preview-cat">TEMPLATE · GURU</div>
-          <div class="preview-title-sm">Template PowerPoint Pembelajaran — 10 Tema</div>
-          <div class="preview-creator">
-            <span class="preview-creator-dot">S</span>
-            Bu Sari
-          </div>
-          <div class="preview-price-row">
-            <div class="preview-price">Rp 50.000</div>
-            <div class="preview-price-label">perkiraan</div>
-          </div>
-          <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
-        </div>
-      </div>
-
-      <!-- Card 8: Coloring Pack -->
-      <div class="preview-card">
-        <div class="preview-cover" style="background: linear-gradient(135deg, #E8DCC0, #FCE8E2);">
-          <span class="preview-badge">PREVIEW</span>
-          <div class="preview-cover-content">
-            <span class="preview-cover-tag">AKTIVITAS</span>
-            <div class="preview-cover-title">Coloring Pack</div>
-            <div class="preview-cover-sub">PAUD · 30 Halaman</div>
-          </div>
-        </div>
-        <div class="preview-info">
-          <div class="preview-cat">AKTIVITAS · PAUD</div>
-          <div class="preview-title-sm">Coloring Pack PAUD — 30 Halaman Tematik</div>
-          <div class="preview-creator">
-            <span class="preview-creator-dot">N</span>
-            Bu Nita
-          </div>
-          <div class="preview-price-row">
-            <div class="preview-price">Rp 18.000</div>
-            <div class="preview-price-label">perkiraan</div>
-          </div>
-          <button class="preview-notify-btn" onclick="scrollToForm()">🔔 Kabari Saya</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="preview-cta-bottom">
-      <div class="preview-cta-text">Mau jadi yang pertama tau saat katalog ini live?</div>
-      <span class="preview-cta-btn" onclick="scrollToForm()">Daftar di waitlist →</span>
     </div>
   </div>
 </section>
 
-<!-- DUO VALUE PROP -->
-<section>
-  <div class="section-num">01 — Dua sisi, satu platform</div>
-  <h2 class="section-title">Tempat materi karya guru bertemu yang membutuhkannya.</h2>
+<section class="duo-section">
+  <div class="duo-header">
+    <span class="section-badge">✨ Dua Sisi, Satu Platform</span>
+    <h2 class="section-title">Tempat karya guru bertemu<br>yang membutuhkan 💜</h2>
+  </div>
 
   <div class="duo-grid">
-    <!-- For Creator -->
     <div class="duo-card creator">
-      <span class="duo-icon">untuk kreator</span>
-      <h3 class="duo-title">Karyamu pantas dihargai</h3>
-      <p class="duo-desc">Modul ajar, soal, worksheet yang sudah kamu bikin selama bertahun-tahun, bisa jadi sumber penghasilan tambahan.</p>
+      <div class="duo-emoji">👩‍🏫</div>
+      <span class="duo-tag">Untuk Guru Kreator</span>
+      <h3 class="duo-title">Monetize karya yang kamu bikin tiap malam.</h3>
+      <p class="duo-desc">Modul ajar dan soal yang sudah kamu siapkan selama bertahun-tahun, bisa jadi sumber pendapatan tambahan yang stabil.</p>
       <ul class="duo-list">
-        <li>Upload sekali, dijual berkali-kali</li>
-        <li>Komisi sampai 90% (Founding Creator)</li>
-        <li>Cair tiap minggu ke rekening</li>
-        <li>Anti-bajak: watermark dinamis otomatis</li>
+        <li>Dapat 90% dari setiap penjualan (Founding Creator)</li>
+        <li>Upload sekali, dijual berkali-kali otomatis</li>
+        <li>Watermark anti-bajak otomatis untuk setiap file</li>
+        <li>Cairkan pendapatan kapan saja via m-banking</li>
       </ul>
     </div>
 
-    <!-- For Buyer -->
     <div class="duo-card buyer">
-      <span class="duo-icon">untuk pembeli</span>
-      <h3 class="duo-title">Materi siap pakai, gak perlu mulai dari nol</h3>
-      <p class="duo-desc">Cari modul ajar, worksheet anak, atau aktivitas belajar di rumah. Dibuat oleh guru asli Indonesia, siap pakai.</p>
+      <div class="duo-emoji">👨‍👩‍👧</div>
+      <span class="duo-tag">Untuk Guru & Orangtua</span>
+      <h3 class="duo-title">Hemat waktu, dapat materi terkurasi.</h3>
+      <p class="duo-desc">Nggak perlu bikin materi dari nol lagi. Pilih dari ribuan modul, worksheet, dan video karya guru-guru terbaik di Indonesia.</p>
       <ul class="duo-list">
-        <li>Ribuan materi dari guru terkurasi</li>
-        <li>Sesuai kurikulum Indonesia</li>
-        <li>Download instan setelah bayar</li>
-        <li>Untuk guru, orangtua, homeschooler</li>
+        <li>Harga terjangkau mulai Rp 15.000 per materi</li>
+        <li>Download instan setelah pembayaran</li>
+        <li>Bisa dipakai berkali-kali, jadi milikmu</li>
+        <li>Quality-checked oleh tim Ajaraku</li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section style="background: var(--bg-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); max-width: none; margin: 0;">
-  <div style="max-width: 1200px; margin: 0 auto;">
-    <div class="section-num">02 — Cara kerjanya</div>
-    <h2 class="section-title">Sederhana untuk semua.</h2>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <div class="step-title">Kreator upload</div>
-        <p class="step-desc">Modul ajar, soal latihan, LKPD, worksheet anak, atau template apapun. Set judul, kategori, dan harga sendiri.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-number">2</div>
-        <div class="step-title">Pembeli cari & beli</div>
-        <p class="step-desc">Guru cari modul untuk kelas, orangtua cari worksheet untuk anak. Bayar via QRIS, e-wallet, atau transfer.</p>
-      </div>
-
-      <div class="step">
-        <div class="step-number">3</div>
-        <div class="step-title">Semua menang</div>
-        <p class="step-desc">File ter-deliver otomatis dengan watermark anti-bajak. Kreator dapat cuan tiap minggu. Pembeli hemat waktu.</p>
-      </div>
-    </div>
+<section class="cat-section">
+  <div style="text-align: center; margin-bottom: 40px;">
+    <span class="section-badge">📦 Apa yang Ada</span>
+    <h2 class="section-title">Kategori materi yang akan tersedia</h2>
   </div>
-</section>
-
-<!-- CATEGORIES -->
-<section>
-  <div class="section-num">03 — Apa yang ada di Ajaraku</div>
-  <h2 class="section-title">Kategori materi yang akan tersedia.</h2>
 
   <div class="cat-grid">
     <div class="cat-card">
+      <div class="cat-emoji">📚</div>
       <span class="cat-tag">UNTUK GURU</span>
       <div class="cat-title">Modul Ajar</div>
       <p class="cat-desc">Kurikulum Merdeka, K13, per pertemuan atau per semester.</p>
     </div>
 
     <div class="cat-card">
+      <div class="cat-emoji">📝</div>
       <span class="cat-tag">UNTUK GURU</span>
       <div class="cat-title">Bank Soal</div>
       <p class="cat-desc">PH, PTS, PAS, USBN. Soal HOTS dengan kunci jawaban.</p>
     </div>
 
     <div class="cat-card">
+      <div class="cat-emoji">✏️</div>
       <span class="cat-tag">GURU & ORANGTUA</span>
       <div class="cat-title">LKPD & Worksheet</div>
       <p class="cat-desc">Lembar kerja siap print untuk semua jenjang.</p>
     </div>
 
     <div class="cat-card">
-      <span class="cat-tag">UNTUK ORANGTUA</span>
-      <div class="cat-title">Aktivitas Anak PAUD/TK</div>
-      <p class="cat-desc">Coloring, tracing, matching. Buat anak belajar sambil main.</p>
-    </div>
-
-    <div class="cat-card">
-      <span class="cat-tag">UNTUK ORANGTUA</span>
-      <div class="cat-title">Materi Homeschooling</div>
-      <p class="cat-desc">Paket lengkap untuk anak yang belajar di rumah.</p>
-    </div>
-
-    <div class="cat-card">
+      <div class="cat-emoji">🎥</div>
       <span class="cat-tag">GURU & ORANGTUA</span>
-      <div class="cat-title">Template Kreatif</div>
-      <p class="cat-desc">PowerPoint pembelajaran, template Canva, materi craft anak.</p>
+      <div class="cat-title">Video Pembelajaran</div>
+      <p class="cat-desc">Video edukasi anak PAUD/SD, stream + download offline.</p>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-emoji">🎨</div>
+      <span class="cat-tag">UNTUK ORANGTUA</span>
+      <div class="cat-title">Aktivitas PAUD/TK</div>
+      <p class="cat-desc">Coloring, tracing, matching. Anak belajar sambil main.</p>
+    </div>
+
+    <div class="cat-card">
+      <div class="cat-emoji">🏠</div>
+      <span class="cat-tag">UNTUK ORANGTUA</span>
+      <div class="cat-title">Homeschooling</div>
+      <p class="cat-desc">Paket lengkap untuk anak yang belajar di rumah.</p>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
-<div class="stats-strip">
-  <div class="stats-inner">
-    <div class="stat">
-      <div class="stat-num">3,4 jt+</div>
-      <div class="stat-label">Guru di Indonesia. Plus jutaan orangtua yang butuh materi anak.</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">90%</div>
-      <div class="stat-label">Komisi yang diterima Founding Creator dari setiap penjualan.</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">Rp 0</div>
-      <div class="stat-label">Biaya pendaftaran selamanya. Bayar hanya saat ada penjualan.</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">100</div>
-      <div class="stat-label">Slot Founding Creator pertama. Tutup setelah penuh.</div>
-    </div>
-  </div>
-</div>
-
-<!-- FAQ -->
-<section>
-  <div class="section-num">04 — Pertanyaan</div>
-  <h2 class="section-title">Yang sering ditanyakan.</h2>
+<section class="faq-section">
+  <span class="section-badge">💬 Pertanyaan</span>
+  <h2 class="section-title">Yang sering ditanyakan</h2>
 
   <div class="faq-list">
     <div class="faq-item" onclick="toggleFaq(this)">
@@ -1439,7 +1490,7 @@
         <span class="faq-q-toggle">+</span>
       </div>
       <div class="faq-a">
-        Tentu. Ajaraku terbuka untuk siapa saja yang butuh materi belajar — orangtua yang mau menemani anak belajar di rumah, homeschooler, bimbel, atau siapa saja. Saat platform launch, kami punya kategori khusus untuk pembeli non-guru.
+        Tentu! Ajaraku terbuka untuk siapa saja yang butuh materi belajar — orangtua yang mau menemani anak belajar di rumah, homeschooler, bimbel, atau siapa saja.
       </div>
     </div>
 
@@ -1449,7 +1500,7 @@
         <span class="faq-q-toggle">+</span>
       </div>
       <div class="faq-a">
-        Iya, 100% gratis daftar. Untuk kreator, gratis upload produk dan kami hanya ambil 10% komisi (untuk Founding Creator) per penjualan. Untuk pembeli, gratis browse — bayar hanya kalau beli.
+        Iya, 100% gratis daftar. Untuk kreator, gratis upload produk dan kami hanya ambil 10% komisi (Founding Creator) per penjualan. Untuk pembeli, gratis browse — bayar hanya kalau beli.
       </div>
     </div>
 
@@ -1469,7 +1520,7 @@
         <span class="faq-q-toggle">+</span>
       </div>
       <div class="faq-a">
-        Tergantung jenis produk. LKPD 1 lembar bisa Rp 3.000-8.000. Modul ajar 1 bab Rp 35.000-75.000. Worksheet anak bundle Rp 15.000-50.000. Materi homeschooling 1 semester Rp 200.000-500.000. Nanti ada AI yang kasih saran harga berdasar benchmark.
+        LKPD 1 lembar Rp 3.000-8.000. Modul ajar 1 bab Rp 35.000-75.000. Worksheet anak bundle Rp 15.000-50.000. Materi homeschooling 1 semester Rp 200.000-500.000. Nanti ada AI yang kasih saran harga berdasar benchmark.
       </div>
     </div>
 
@@ -1479,17 +1530,7 @@
         <span class="faq-q-toggle">+</span>
       </div>
       <div class="faq-a">
-        Jujur: 3-6 bulan pertama biasanya masih kecil (Rp 200rb-500rb). Setelah punya 30+ produk dan reputasi terbangun, banyak kreator di marketplace serupa di luar negeri earn Rp 2-5 juta per bulan, bahkan ada yang mencapai puluhan juta. Tapi ini bukan instan — butuh konsistensi.
-      </div>
-    </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">
-        Bedanya Ajaraku sama jualan di Shopee/Tokopedia?
-        <span class="faq-q-toggle">+</span>
-      </div>
-      <div class="faq-a">
-        Di Shopee/Tokopedia, materi belajar harus dijadikan produk fisik (flashdisk, CD), banyak kompetisi, dan tidak ada sistem yang khusus untuk produk digital. Di Ajaraku: 100% digital download, fokus materi belajar, watermark anti-bajak, dan komunitas khusus pendidikan.
+        Jujur: 3-6 bulan pertama biasanya masih kecil (Rp 200rb-500rb). Setelah punya 30+ produk dan reputasi terbangun, banyak kreator earn Rp 2-5 juta per bulan, bahkan ada yang mencapai puluhan juta. Tapi ini bukan instan — butuh konsistensi.
       </div>
     </div>
 
@@ -1499,70 +1540,41 @@
         <span class="faq-q-toggle">+</span>
       </div>
       <div class="faq-a">
-        Mas Gema — guru sekaligus founder Asisten Guru, AsikAsesmen, dan Lentera CPNS. Sudah membantu 2.000+ guru di Indonesia. Ajaraku lahir dari misi pribadi: bikin guru Indonesia lebih sejahtera, dan bantu orangtua menemukan materi belajar berkualitas untuk anak.
+        Mas Gema — guru sekaligus founder Asisten Guru, AsikAsesmen, dan BimbelKu. Sudah membantu 2.000+ guru di Indonesia. Ajaraku lahir dari misi: bikin guru Indonesia lebih sejahtera, dan bantu orangtua temukan materi belajar berkualitas.
       </div>
     </div>
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<div class="final-cta">
+<div class="final-cta" id="daftar">
   <div class="final-cta-inner">
-    <h2>Siap jadi bagian dari Ajaraku?</h2>
-    <p>Daftar di waitlist sekarang. Kami kabari kamu pertama saat launch.</p>
+    <h2>Siap jadi bagian dari Ajaraku? 🚀</h2>
+    <p>Daftar waitlist sekarang. Kami kabari pertama saat launch.</p>
 
     <div class="form-wrap">
-      <div class="form-content" data-mode="kreator">
-        <div class="for-creator">
-          <div class="form-label">Daftar Sekarang (Founding Creator)</div>
-          <div class="form-label-sub">Hanya 100 slot. Komisi lebih besar + akses gratis selamanya.</div>
+      <form class="form-input-group" onsubmit="handleSubmit(event)">
+        <input type="text" class="form-input" placeholder="Nama kamu" required>
+        <input type="email" class="form-input" placeholder="Email aktif" required>
+        <button type="submit" class="form-btn">Daftar ✨</button>
+      </form>
 
-          <form class="form-input-group" onsubmit="handleSubmit(event, 'kreator')">
-            <input type="text" class="form-input" placeholder="Nama lengkap" required>
-            <input type="email" class="form-input" placeholder="Email aktif" required>
-            <button type="submit" class="form-btn">Daftar →</button>
-          </form>
-
-          <div class="form-bonus">
-            <strong>BONUS:</strong> 90% komisi (vs 80% normal) + grup WhatsApp eksklusif Mas Gema.
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top: 16px; text-align: center; font-size: 13px; color: rgba(250, 246, 240, 0.6);">
-        Bukan kreator? <a href="#form-top" style="color: var(--accent); text-decoration: underline;" onclick="document.querySelectorAll('.toggle-btn')[1].click()">Daftar sebagai pembeli →</a>
+      <div class="form-bonus">
+        <strong>🎁 BONUS Founding Creator:</strong> 90% komisi (vs 80% normal) + grup WhatsApp eksklusif Mas Gema. Hanya 100 slot pertama!
       </div>
     </div>
   </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <div>© 2026 Ajaraku · Sebuah produk dari <a href="#">Mas Gema</a></div>
+  <div>© 2026 Ajaraku · Dibuat dengan 💜 oleh <a href="#">Mas Gema</a></div>
   <div style="margin-top: 8px; opacity: 0.6;">Materi belajar untuk semua. Karya guru, untuk siapa saja.</div>
 </footer>
 
 <script>
   function scrollToForm() {
-    // Scroll to final CTA form at bottom
-    const finalCta = document.querySelector('.final-cta');
-    if (finalCta) {
-      finalCta.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    } else {
-      // Fallback: scroll to top form
-      const heroForm = document.querySelector('.hero .form-wrap');
-      if (heroForm) heroForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
-
-  function switchMode(mode, btn) {
-    // Update toggle visual
-    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    // Update all form-content data-mode
-    document.querySelectorAll('.form-content').forEach(el => {
-      el.setAttribute('data-mode', mode);
+    document.querySelector('.final-cta').scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
     });
   }
 
@@ -1570,26 +1582,19 @@
     el.classList.toggle('open');
   }
 
-  function handleSubmit(e, type) {
+  function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
     const inputs = form.querySelectorAll('input');
     const name = inputs[0].value;
     const email = inputs[1].value;
 
-    const message = type === 'kreator'
-      ? `Terima kasih, ${name}! Slot Founding Creator kamu sudah kami catat.`
-      : `Terima kasih, ${name}! Voucher Rp 25.000 menanti saat launch.`;
-
-    form.innerHTML = `
-      <div style="padding: 20px; background: rgba(59, 107, 74, 0.2); border: 1px solid #3B6B4A; border-radius: 12px; color: #FAF6F0; width: 100%;">
-        <strong style="font-family: 'Fraunces', serif; font-size: 18px;">✓ ${message.split('!')[0]}!</strong><br>
-        <span style="font-size: 14px; opacity: 0.9;">${message.split('!')[1]} Kami kabari lewat email <strong>${email}</strong>.</span>
+    form.outerHTML = `
+      <div style="padding: 24px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 20px; color: white; backdrop-filter: blur(10px);">
+        <div style="font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 8px;">🎉 Terima kasih, ${name}!</div>
+        <div style="font-size: 14px; opacity: 0.9;">Slot Founding Creator kamu sudah kami catat. Kami kabari di email <strong>${email}</strong> saat launch.</div>
       </div>
     `;
-
-    // TODO: Replace with actual integration (Google Form, Airtable, Supabase, etc)
-    // fetch('YOUR_ENDPOINT', { method: 'POST', body: JSON.stringify({ name, email, type }) });
   }
 </script>
 
